@@ -1,2 +1,17 @@
 <h1 id="header">
-  
+	Cyclopedia - The UnWiki
+</h1>
+<div id="content">
+	
+</div>
+<div id="footer">
+    <a target="_blank" href="http://sailsjs.com" class="copyright">Built with Sails.js</a>
+ </div>
+
+<script type='text/javascript'>
+	var cyclopedia = angular.module('cyclopedia', ['ngResource']);
+
+	cyclopedia.factory('Article', ['$resource', function($resource){
+		return $resource('/article/:id', {id:'@id'});
+	}]);
+</script>
