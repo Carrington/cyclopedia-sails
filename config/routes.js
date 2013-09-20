@@ -34,7 +34,7 @@ module.exports.routes = {
   // (This would also work if you had a file at: `/views/home.ejs`)
   '/': {
     view: 'home/index'
-  }
+  },
 
   /*
   // But what if you want your home page to display
@@ -92,6 +92,23 @@ module.exports.routes = {
   'get /*(^.*)': 'UserController.profile'
 
   */
+  
+  '/signup' : {
+    view: 'user/signup',
+    controller: 'user',
+    action: 'signup'
+  },
+  '/login' : {
+    view: 'user/login',
+    controller: 'user',
+    action: 'login'
+  },
+  '/view/:article' : {
+    view: 'article/view',
+    controller: 'article',
+    action: 'view'
+  }
+
 };
 
 
