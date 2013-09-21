@@ -1,12 +1,12 @@
 //Model entity for Article
-var Article = {
+module.exports = {
 	attributes: {
 		title: {
 			type: 'string',
 			required: true,
 			alphanumeric: true
 		},
-		author: 'string',
+		authorId: 'int',
 		body: 'text'
 		
 	}
