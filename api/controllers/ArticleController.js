@@ -5,7 +5,7 @@
  * @description	:: Contains logic for handling requests.
  */
 
-var obscura = require('obscura');
+var obscura = require('Obscura');
 
 module.exports = {
 
