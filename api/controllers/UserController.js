@@ -18,11 +18,11 @@ module.exports = {
       } else if (usr) {
         res.send(400, {error: "Username already taken"});
       } else {
-        Users.findByEmail(email).done(function error, user) {
+        Users.findByEmail(email).done(function (error, user) {
           if (error) {
             res.send(500, { error: "DB Error" });
           } else if (user) {
-            res.send(400, {error: "Already an account associated with this email address");
+            res.send(400, {error: "Already an account associated with this email address"});
           } else {
             var hasher = require("password-hash");
             password = hasher.generate(password);
@@ -34,9 +34,9 @@ module.exports = {
                 req.session.user = user;
                 res.send(user);
               }
-            }
+            });
           }
-        }
+        });
       }
     });
   },
