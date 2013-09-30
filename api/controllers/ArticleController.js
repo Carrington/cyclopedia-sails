@@ -37,9 +37,19 @@ module.exports = {
     var viewContent = function(content) {
 	return content;
     }
-    var content = obscura.filterContent(req.session.user.preferences.filters, Article.find(req.param("article")).body, "html", viewContent);
-    res.view({content: content});
-
+    var filters = []
+    if (req.session.user) {
+      //getting the user's filter prefs - even if a guest user set prefs on the index page, they will be stored here.
+      filters = req.session.user.preferences.filters;
+    }
+    var article = {};
+    Article.find().where({id:  req.param("article")}).exec(function(err, articles) {
+      article = articles;
+    });
+    
+    var content = obscura.filterContent(filters, article, "html", viewContent);
+    sails.log.warn(content);
+    res.view({content: content, title: Article.find(req.param("article")).title});
   }
 
 };

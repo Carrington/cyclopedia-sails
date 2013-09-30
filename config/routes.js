@@ -106,8 +106,7 @@ module.exports.routes = {
     action: 'login'
   },
   '/view/:article' : {
-    view: 'article/view',
-    controller: 'article',
+    controller: 'Article',
     action: 'view'
   }
 
