@@ -34,22 +34,29 @@ module.exports = {
 
     // This will render the view: 
     // /var/www/html/cyclopedia-sails/views/Article/view.ejs
-    var viewContent = function(content) {
-	return content;
-    }
+    
     var filters = []
+    
     if (req.session.user) {
       //getting the user's filter prefs - even if a guest user set prefs on the index page, they will be stored here.
       filters = req.session.user.preferences.filters;
     }
+
     var article = {};
+    
     Article.find().where({id:  req.param("article")}).exec(function(err, articles) {
       article = articles;
     });
     
-    var content = obscura.filterContent(filters, article, "html", viewContent);
-    sails.log.warn(content);
-    res.view({content: content, title: Article.find(req.param("article")).title});
+    var content = '';
+    obscura.filterContent(filters, article[0].body, "html",function(err, val) {
+	sails.log.warn(val);
+        content = val;
+      }
+    );
+
+
+    res.view({content: content, title: article[0].title});
   }
 
 };
