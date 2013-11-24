@@ -10,14 +10,14 @@ module.exports = {
 
   attributes: {
     user: {
-      type='integer',
-      require=true
+      type: 'integer',
+      require: true
     },
     exclusionValues: {
-      type='array'
+      type: 'array'
     },
     inclusionValues: {
-      type='array'
+      type: 'array'
     }    
   }
 
