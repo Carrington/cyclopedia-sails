@@ -9,9 +9,8 @@
 module.exports = {
 
   attributes: {
-    user: {
-      type: 'integer',
-      require: true
+    preferenceName: {
+      type: 'STRING',
     },
     exclusionValues: {
       type: 'array'

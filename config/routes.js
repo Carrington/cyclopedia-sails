@@ -96,13 +96,11 @@ module.exports.routes = {
   */
   
   '/signup' : {
-    view: 'user/signup',
-    controller: 'user',
+    controller: 'main',
     action: 'signup'
   },
   '/login' : {
-    view: 'user/login',
-    controller: 'user',
+    controller: 'main',
     action: 'login'
   },
   '/view/:article' : {
