@@ -16,7 +16,36 @@ module.exports.policies = {
 
   // Default policy for all controllers and actions
   // (`true` allows public access) 
-  '*': true
+  '*': true,
+  Preference:  {
+    '*': false,
+    'create': 'isAdmin',
+    'find': true,
+    'findAll': true,
+    'update': false,
+    'destroy': false
+  },
+  User: {
+    '*': false,
+    'create': true,
+    'find': true,
+    'findAll': 'isModerator',
+    'update': true,
+    'destroy': 'isAdmin'
+  },
+  Article: {
+    '*': false,
+    'create': isContributor,
+    'find': true,
+    'findAll': true,
+    'update': isContributor,
+    'destroy': 'isAdmin'
+  },
+  UserPreference: {
+    '*': false
+  }
+  
+  
 
   /*
 	// Here's an example of adding some policies to a controller
