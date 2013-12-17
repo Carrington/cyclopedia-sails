@@ -35,10 +35,10 @@ module.exports.policies = {
   },
   Article: {
     '*': false,
-    'create': isContributor,
+    'create': 'isContributor',
     'find': true,
     'findAll': true,
-    'update': isContributor,
+    'update': 'isContributor',
     'destroy': 'isAdmin'
   },
   UserPreference: {
