@@ -6,21 +6,7 @@ var login = function() {
             '/login',
             {username: username, password: password},
             function(user) {
-              $("#login-box").remove();
-              $("#signup-box").remove();
-              $("#user-info").show().text('');
-	      $("#guest-greeting").remove();
-	      $("#user-info").prepend('<h3 id="user-greeting">Hello, ' + user.username + '</h3>');
-              $("#user-info").append('<div id="pref-select"></div>');
-	      $.post(
-	        '/preference/find',
-		{},
-		function(xhr) {
-		  for (var i = 0; i < xhr.length; i++) {
-		    $("#pref-select").append("<div class=\"pref-block\">" + "<a href=\"/user/" + user.id + "/prefs/select?id=" + xhr.id + "\">" + xhr.name + "</div>");
-		  }
-		}
-	      );
+              window.location = "/user/" + user.username;
 	    }
     ).fail(function(res) {
       alert("Error: " + res.responseText);
