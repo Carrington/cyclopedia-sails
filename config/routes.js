@@ -28,7 +28,10 @@
 
 module.exports.routes = {
 
-  
+  '/' : {
+    controller: 'main',
+    action: 'index'   
+  },
   '/signup' : {
     controller: 'main',
     action: 'signup'
@@ -36,6 +39,10 @@ module.exports.routes = {
   '/login' : {
     controller: 'main',
     action: 'login'
+  },
+  '/guestReminder' : {
+    controller: 'main',
+    action: 'guestreminder' 
   },
   '/view/:article' : {
     controller: 'Article',

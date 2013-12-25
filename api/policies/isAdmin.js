@@ -1,4 +1,9 @@
 module.exports = function isAdmin (req, res, next) {
+
+  //user be a guest, yo
+  if (req.session.user == undefined) {
+    return res.redirect('/guestReminder');
+  }
   var userId = req.session.user.id;
 
   Role
@@ -7,8 +12,6 @@ module.exports = function isAdmin (req, res, next) {
 
     if (err) return next(err);
 
-    //User be a guest, yo
-    if ( ! role ) return res.redirect('/guestReminder');
 
     //The user has a role omfg
 
