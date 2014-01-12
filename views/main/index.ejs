@@ -2,7 +2,13 @@
 
 <div id="user-info">
     <h3 id="guest-greeting">Guest Users -</h3>
-    <span>Anonymous users may set preferences for viewing here.</span>
+    <div id="preference-box">
+	<% _.each(content, function (preference) { %>
+	  <li>
+	    <span class="setPrefClick"><%= preference.preferenceName %></span>
+	  </li>
+	<% }); %>
+    </div>
 </div>
 <div id="login-box">
     <h3>Login</h3>

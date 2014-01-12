@@ -51,6 +51,14 @@ module.exports.routes = {
   '/user/:user' : {
     controller: 'User',
     action: 'view'
+  },
+  '/user/updateSelf' : {
+    controller: 'User',
+    action: 'updateSelf'
+  },
+  '/user/updateOther/:user' : {
+    controller: 'User',
+    action: 'updateOther'
   }
 
 };

@@ -7,7 +7,11 @@
 
 module.exports = {
   index: function (req, res) {
-    res.view();
+    var content;
+    Preference.findAll().done(function(err, prefs) {
+      content = prefs;
+    });
+    res.view({content: content});
   },
   guestreminder: function (req, res) {
     res.view();

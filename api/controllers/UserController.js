@@ -22,14 +22,68 @@ module.exports = {
       res.send(500,error);
     }
     User.findOneByUsername(req.params.user).done(function(err, usr) {
-      if (err) res.send(500, "DB Error");
+      if (err) res.send(500, "DB Error: " + err);
       if (usr) res.send({username: usr.username, email: usr.email, createdAt: usr.createdAt, id: usr.id});
     });
   },
   update: function(req, res) {
+    //Stub. Unreachable because of policies.
+    res.send(500,'This method is a stub.');
+  },
+  updateSelf: function(req, res) {
     if (req.method != 'POST' && req.method != 'PUT') {
       var error = new Error("Save is only available via POST or PUT");
       res.send(500,error);
     }
+    User.findOneByUsername(req.session.user).done(function (err, usr) {
+      if (err) res.send(500, "DB Error: " + err);
+      usr.email = req.param('email');
+      var hasher = require('password-hash');
+      var password = hasher.generate(req.param('password'));
+      usr.password = password;
+      usr.save(function(err) {
+        if (err) res.send(500, "DB Error: " + err);
+        sails.log.info('User ' + req.param('user') + ' was updated.');
+      });
+    });
+
+  },
+  updateOther: function(req, res) {
+    if (req.method != 'POST' && req.method != 'PUT') {
+      var error = new Error("Save is only available via POST or PUT");
+      res.send(500,error);
+    }
+    User.findOneByUsername(req.params.user).done(function (err, usr) {
+      if (err) res.send(500, "DB Error: " + err);
+      usr.email = req.params('email');
+      var hasher = require('password-hash');
+      var password = hasher.generate(req.params('password'));
+      usr.password = password;
+      usr.role = req.params.role;
+      usr.username = req.params.username;
+      usr.save(function(err) {
+        if (err) res.send(500, "DB Error: " + err);
+        sails.log.info('User ' + req.param('user') + ' was updated.');
+      });
+    });
+  },
+  create: function(req, res) {
+    if (req.method != 'POST' && req.method != 'PUT') {
+      var error = new Error("Save is only available via POST or PUT");
+      res.send(500,error);
+    }
+    User.create().done(function (err, usr) {
+      if (err) res.send(500, "DB Error: " + err);
+      usr.username = req.params.username;
+      usr.email = req.params.email;
+      var hasher = require('password-hash');
+      var password = hasher.generate(req.params('password'));
+      usr.password = password;
+      usr.role = 1;
+      usr.save(function(err) {
+        if (err) res.send(500, "DB Error: " + err);
+        sails.log.info('User ' + req.param('user') + ' was updated.');
+      });
+    });
   }
-};
+}

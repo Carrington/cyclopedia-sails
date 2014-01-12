@@ -11,7 +11,8 @@ module.exports = {
   attributes: {
   	username: 'STRING',
 	password: 'STRING',    
-	email: 'STRING'
+	email: 'STRING',
+	role: 'integer'
   }
 
 };

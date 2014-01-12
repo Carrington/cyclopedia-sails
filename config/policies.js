@@ -30,7 +30,9 @@ module.exports.policies = {
     'create': true,
     'find': true,
     'findAll': 'isModerator',
-    'update': true,
+    'update': false,
+    'updateSelf': true,
+    'updateOther': 'isAdmin',
     'destroy': 'isAdmin',
     'view': true
   },
